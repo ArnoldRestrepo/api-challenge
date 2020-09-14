@@ -52,14 +52,19 @@ const API_URL = `https://api.mocki.io/v1/56e929d8`;
    * @description Create HTML String
    */
   function createTemplateString(item) {
-    return `<div class="Card">
-          <h3 class="Card__title">${item.name}</h3>
-          <span class="Card__id">${item.id}</span>
-          <span class="${item.offer ? 'is--offer' : 'is--normal'}">Ofertas: ${
-      item.offer ? 'is--offer' : 'is--normal'
-    }</span>
-          <span>Productos: ${item.children.length}</span>
-       </div>
+    return `
+      <div class="Card">
+        <div class="Card__header">
+          <h3 class="Card__title">${item.name.normalize()}</h3>
+          <small class="Card__id">#${item.id}</small>
+        </div>
+        <div class="Card__content">
+          <small class="${item.offer ? 'is--offer' : 'is--normal'}">
+            <i class="fas fa-certificate"></i> In Offer!
+          </small>
+          <small class="Card__products">${item.children.length} Products</small>
+        </div>
+      </div>
     `;
   }
   /**
@@ -69,8 +74,8 @@ const API_URL = `https://api.mocki.io/v1/56e929d8`;
   function createTemplateStringCategory(item) {
     return `
       <div class="Category__wrapper">
-        <h1 class="Category__title">Categoria: ${item.name}</h1>
-        <small>${item.children.length} Productos</small>
+        <h1 class="Category__title">Category: ${item.name}</h1>
+        <small>${item.children.length} Products found</small>
       </div>
     `;
   }

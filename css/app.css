@@ -1,3 +1,25 @@
+:root {
+  --blue: #1e4174;
+  --softblue: #3186a5;
+  --yellow: #dda94b;
+  --white: #fefefe;
+  --black: #212121;
+}
+
+/* Hide Arrow Input Type Number */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 h1,
 h2,
 h3,
@@ -12,8 +34,53 @@ h6 {
 
 body {
   margin: 0;
-  padding: 1rem;
   font-family: 'Roboto', Helvetica, sans-serif;
+  background: var(--white);
+}
+
+.Header,
+.Category,
+.Cards,
+.Search {
+  padding: 1rem;
+}
+
+.Header {
+  background: var(--blue);
+}
+
+.Header__title {
+  text-align: center;
+  color: var(--yellow);
+}
+
+.Search {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-gap: 0 1rem;
+  align-items: center;
+}
+
+.Search__input {
+  height: 40px;
+  padding: 0 8px;
+  border: 2px solid var(--blue);
+  border-radius: 5px;
+  font-size: 1rem;
+  color: var(--blue);
+  outline: none;
+  font-family: 'Roboto Slab', Helvetica, sans-serif;
+}
+
+.Search__btn {
+  height: 46px;
+  background: var(--yellow);
+  border: none;
+  border-radius: 5px;
+  color: var(--blue);
+  font-family: 'Roboto Slab', Helvetica, sans-serif;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
 .Category__wrapper {
@@ -24,16 +91,55 @@ body {
 
 .Cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 1rem;
 }
 
 .Card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border-radius: 5px;
   background: #fefefe;
-  border: 1px solid red;
+  border: 1px solid var(--blue);
   padding: 1rem;
+  background: var(--blue);
+  overflow: hidden;
 }
+
+.Card__header {
+  display: grid;
+  grid-template-columns: 1fr 60px;
+  align-items: start;
+  margin-bottom: 1rem;
+  grid-gap: 0 1rem;
+}
+
 .Card__title {
-  margin-top: 0;
+  margin: 0;
+  color: var(--yellow);
+}
+
+.Card__id {
+  color: var(--white);
+  text-align: right;
+}
+
+.is--offer {
+  color: var(--white);
+  font-size: 1rem;
+}
+
+.is--normal {
+  display: none;
+}
+
+.Card__content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Card__products {
+  color: var(--white);
+  text-align: right;
 }
