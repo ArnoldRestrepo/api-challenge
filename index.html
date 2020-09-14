@@ -4,9 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>API Challenge - Aflore Frontend Job</title>
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Styles -->
     <link rel="stylesheet" href="css/app.css" />
   </head>
   <body>
+    <header class="Header">
+      <h1 class="Header__title">Clean Marketplace</h1>
+    </header>
+    <form action="#" id="js-search-form" class="SearchForm__input">
+      <input
+        type="number"
+        name=""
+        min="0"
+        id="js-search-input"
+        placeholder="Busccar por ID"
+        class="SearchForm__input"
+      />
+      <button type="submit" class="SearchForm__input">Buscar</button>
+    </form>
+    <section class="Wrapper">
+      <article class="Category" id="js-category">
+        <p>Cargando Categoria...</p>
+      </article>
+      <article class="Cards" id="js-data">
+        <p>Cargando Productos...</p>
+      </article>
+    </section>
     <script src="js/api.js" type="module"></script>
   </body>
 </html>
