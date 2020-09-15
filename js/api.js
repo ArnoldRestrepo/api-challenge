@@ -23,7 +23,11 @@ const API_URL = `https://api.mocki.io/v1/56e929d8`;
    */
   async function getData(url) {
     try {
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        method: 'get',
+        mode: 'cors',
+        headers: new Headers(),
+      });
       const data = response.json();
       return data;
     } catch (e) {
