@@ -1,8 +1,6 @@
-// Helpers and Base
-
 /**
  * @name API-CHALLENGE Aflore API Challenge
- * @author @restrepo_arnold Arnold Restrepo Hernandez - Frontend Developer
+ * @author @restrepo_arnold Arnold Restrepo Hernandez | Frontend Developer | arnoldrestrepo.com
  * @description App for get elements by Mocki API
  */
 
@@ -11,8 +9,8 @@ const API_URL = `https://api.mocki.io/v1/56e929d8`;
 (async function load() {
   /**
    * @name Containers
+   * @description DOM Elements for render data and events handling
    */
-
   const $dataContainer = document.getElementById('js-data');
   const $categoryContainer = document.getElementById('js-category');
   const $form = document.getElementById('js-search-form');
@@ -39,6 +37,7 @@ const API_URL = `https://api.mocki.io/v1/56e929d8`;
   /**
    * @name createTemplate
    * @description Create Template for HTML
+   * @param HTMLString Template String with HTML Data
    */
 
   function createTemplate(HTMLString) {
@@ -50,7 +49,9 @@ const API_URL = `https://api.mocki.io/v1/56e929d8`;
   /**
    * @name createTemplateString
    * @description Create HTML String
+   * @param item List Element
    */
+
   function createTemplateString(item) {
     return `
       <div class="Card">
@@ -67,10 +68,13 @@ const API_URL = `https://api.mocki.io/v1/56e929d8`;
       </div>
     `;
   }
+
   /**
    * @name createTemplateStringCategory
    * @description Create HTML String for Category
+   * @param item List Element
    */
+
   function createTemplateStringCategory(item) {
     return `
       <div class="Category__wrapper">
@@ -81,8 +85,28 @@ const API_URL = `https://api.mocki.io/v1/56e929d8`;
   }
 
   /**
+   * @name createTemplateStringEmpty
+   * @description Create HTML String for Category
+   * @param message Message for String Error Element
+   */
+
+  function createTemplateStringEmpty(message) {
+    return `
+      <div class="Error">
+        <h3 class="Error__title">
+          <i class="fas fa-exclamation-triangle"></i>
+          ${message} 
+        </h3>
+        <button onClick="window.location.reload()" class="Reload">Reload Page</button>
+      </div>
+    `;
+  }
+
+  /**
    * @name renderItems
    * @description Render Items List for Children data
+   * @param data Data List
+   * @param $container DOM Element for render data
    */
 
   function renderItems(list, $container) {
@@ -97,13 +121,61 @@ const API_URL = `https://api.mocki.io/v1/56e929d8`;
   /**
    * @name renderCategory
    * @description Render Category text
+   * @param data Data List
+   * @param $container DOM Element for render data
    */
+
   function renderCategory(data, $container) {
     $container.innerHTML = '';
     let HTMLString = createTemplateStringCategory(data);
     let itemTemplate = createTemplate(HTMLString);
     $container.append(itemTemplate);
   }
+
+  /**
+   * @name renderEmptyData
+   * @description Render Category text
+   * @param message Message for Error Title
+   * @param $container DOM Element for render data
+   */
+
+  function renderEmptyData(message, $container) {
+    $container.innerHTML = '';
+    let HTMLString = createTemplateStringEmpty(message);
+    let itemTemplate = createTemplate(HTMLString);
+    $container.append(itemTemplate);
+  }
+
   renderCategory(dataAPI, $categoryContainer);
   renderItems(dataAPI.children, $dataContainer);
+
+  /**
+   * @name findId
+   * @description Find Id in Data
+   * @param id Number to Search
+   * @param array Data Array to id find
+   */
+
+  function findId(id, array) {
+    const newData = array.find((element) => element.id === id);
+    return newData;
+  }
+
+  /**
+   * @name SearchForm
+   * @description Search Form
+   */
+
+  $form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const numberSearch = parseInt($formInput.value);
+    const dataSearch = findId(numberSearch, dataAPI.children);
+    if (dataSearch) {
+      let arraySearch = [];
+      arraySearch.push(dataSearch);
+      renderItems(arraySearch, $dataContainer);
+    } else {
+      renderEmptyData(`Product #${numberSearch} not found`, $dataContainer);
+    }
+  });
 })();
